@@ -48,4 +48,9 @@ def main():
     
     
 main()
+
 print("in main")
+
+if 0 == 0:
+    print("in main")
+
