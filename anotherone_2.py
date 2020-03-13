@@ -16,3 +16,8 @@ print(check_zip_code("90210 is a TV show")) # False
 print(check_zip_code("Their address is: 123 Main Street, Anytown, AZ 85258-0001.")) # True
 print("this is an add test")
 print("this is another test")
+
+
+def git_opeation():
+    print("I am adding example.py file to the remote repository.")
+git_opeation()
