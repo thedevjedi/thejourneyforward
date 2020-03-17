@@ -4,20 +4,21 @@
 import json
 import locale
 import sys
-from email.message import EmailMessage
+
 from reportlab.platypus import SimpleDocTemplate
 from reportlab.platypus import Paragraph, Spacer, Table, Image
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
+
 import os.path
 import mimetypes
 import smtplib
 import getpass
 
 
-#import emails
-#import os
-#import reports
+import emails
+import os
+import reports
     
 def load_data(filename):
     """Loads the contents of filename as a JSON file."""
@@ -113,17 +114,16 @@ def main(argv):
     
 
     # TODO: turn this into a PDF report
-    #reports.generate("/tmp/cars.pdf", "Sales summary for last month", summary, cars_dict_to_table(data))
+    reports.generate("/tmp/cars.pdf", "Sales summary for last month", summary, cars_dict_to_table(data))
     
     # TODO: send the PDF report as an email attachment
     sender = "automation@example.com"
     receiver = "{}@example.com".format(os.environ.get('USER'))
     subject = "Sales summary for last month"
-    make,model,revenue = ""
+    body = summary
     
-    body = "The {} {} generated the most revenue: {}".format(make,model,revenue)
-    #message = emails.generate(sender, receiver, subject, body, "/tmp/cars.pdf")
-    #emails.send(message)
+    message = emails.generate(sender, receiver, subject, body, "/tmp/cars.pdf")
+    emails.send(message)
     
 if __name__ == "__main__":
     main(sys.argv)
