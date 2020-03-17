@@ -5,11 +5,6 @@ import json
 import locale
 import sys
 
-from reportlab.platypus import SimpleDocTemplate
-from reportlab.platypus import Paragraph, Spacer, Table, Image
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib import colors
-
 import os.path
 import mimetypes
 import smtplib
@@ -20,6 +15,14 @@ import emails
 import os
 import reports
     
+
+g_max_rev = ""
+g_rev_max_val = ""
+g_make_model_year = ""
+g_sale_count = ""
+g_yr_maximum = ""
+g_yr_max_val = ""
+
 def load_data(filename):
     """Loads the contents of filename as a JSON file."""
     with open(filename) as json_file:
@@ -94,6 +97,25 @@ def process_data(data):
     summary.append(["<br/>"])
     summary.append(["The most popular year was {} with {} sales.".format(yr_maximum,yr_max_val)])                  
 
+    global g_max_rev
+    g_max_rev = max_rev
+    
+    global g_rev_max_val
+    g_rev_max_val = rev_max_val
+    
+    global g_make_model_year
+    g_make_model_year = make_model_year
+    
+    global g_sale_count
+    g_sale_count = sale_count
+    
+    global g_yr_maximum
+    g_yr_maximum = yr_maximum
+    
+    global g_yr_max_val
+    g_yr_max_val = yr_max_val
+
+
     return summary
 
 
@@ -112,15 +134,24 @@ def main(argv):
     data = load_data(tf)
     summary = process_data(data)
     
+    my_text = "The {} generated the most revenue: ${}".format(g_max_rev, g_rev_max_val) 
+    + "<br />" + "The {} had the most sales: {}".format(g_make_model_year,g_sale_count)
+    + "<br />" + "The most popular year was {} with {} sales.".format(g_yr_maximum,g_yr_max_val)
 
+    thedata = cars_dict_to_table(data)
     # TODO: turn this into a PDF report
-    reports.generate("/tmp/cars.pdf", "Sales summary for last month", summary, cars_dict_to_table(data))
+    reports.generate("/tmp/cars.pdf", "Sales summary for last month", my_text, thedata)
     
     # TODO: send the PDF report as an email attachment
     sender = "automation@example.com"
     receiver = "{}@example.com".format(os.environ.get('USER'))
     subject = "Sales summary for last month"
-    body = summary
+    
+    my_text2 = "The {} generated the most revenue: ${}".format(g_max_rev, g_rev_max_val) 
+    + " \n " + "The {} had the most sales: {}".format(g_make_model_year,g_sale_count)
+    + " \n " + "The most popular year was {} with {} sales.".format(g_yr_maximum,g_yr_max_val)
+    
+    body = my_text2
     
     message = emails.generate(sender, receiver, subject, body, "/tmp/cars.pdf")
     emails.send(message)
