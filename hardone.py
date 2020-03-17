@@ -18,19 +18,6 @@ import getpass
 #import emails
 #import os
 #import reports
-
-def build_pdf():
-    fruit = {"elderberries": 1,"figs": 1,"apples": 2,"durians": 3,"bananas": 5,"cherries": 8,"grapes": 13}
-    report = SimpleDocTemplate("/home/scottdavis/eclipse-workspace/module1/report.pdf")
-    styles = getSampleStyleSheet()
-    report_title = Paragraph("A Complete Inventory of My Fruit", styles["h1"])
-    table_data = []
-    for k, v in fruit.items():
-        table_data.append([k, v])
-    
-    table_style = [('GRID', (0,0), (-1,-1), 1, colors.black)]
-    report_table = Table(data=table_data, style=table_style, hAlign="LEFT")    
-    report.build([report_title, report_table])
     
 def load_data(filename):
     """Loads the contents of filename as a JSON file."""
@@ -100,7 +87,11 @@ def process_data(data):
     rev_max_val = max_revenue[max_rev]
     
     
-    summary = ["The {} generated the most revenue: ${}".format(format_car(max_revenue["car"]), max_revenue["revenue"]),]
+    summary = ["The {} generated the most revenue: ${}".format(max_rev, rev_max_val),]
+    summary.append(["<br/>"])
+    summary.append(["The {} had the most sales: {}".format(make_model_year,sale_count)])
+    summary.append(["<br/>"])
+    summary.append(["The most popular year was {} with {} sales.".format(yr_maximum,yr_max_val)])                  
 
     return summary
 
@@ -119,20 +110,10 @@ def main(argv):
     tf = '/home/scottdavis/eclipse-workspace/mytest/' + 'cars.json'
     data = load_data(tf)
     summary = process_data(data)
+    
 
     # TODO: turn this into a PDF report
-    table_data=[
-        ['Name', 'Amount', 'Value'],
-        ['elderberries', 10, 0.45],
-        ['figs', 5, 3],
-        ['apples', 4, 2.75],
-        ['durians', 1, 25],
-        ['bananas', 5, 1.99],
-        ['cherries', 23, 5.80],
-        ['grapes', 13, 2.48],
-        ['kiwi', 4, 0.49]]
-    
-    #reports.generate("/tmp/cars.pdf", "A Complete Inventory of My Fruit", "This is all my fruit.", table_data)
+    #reports.generate("/tmp/cars.pdf", "Sales summary for last month", summary, cars_dict_to_table(data))
     
     # TODO: send the PDF report as an email attachment
     sender = "automation@example.com"
