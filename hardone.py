@@ -61,9 +61,6 @@ def process_data(data):
         item_price = locale.atof(item["price"].strip("$"))
         item_revenue = salescount * item_price
         
-        #if item_revenue > max_revenue["revenue"]:
-         #   item["revenue"] = item_revenue
-        #max_revenue = item
         max_revenue[thecar] = item_revenue
         
         # TODO: also handle max sales
@@ -91,13 +88,18 @@ def process_data(data):
         else:
             most_popular_year[tc["car_year"]] = item["total_sales"]
         
-        
+    #pop year    
     yr_maximum = max(most_popular_year, key=most_popular_year.get)
     yr_max_val = most_popular_year[yr_maximum]
+    
+    #most sales
     [(make_model_year, sale_count)] = max_sales.items()
     
+    #max rev
     max_rev = max(max_revenue, key=max_revenue.get)
     rev_max_val = max_revenue[max_rev]
+    
+    
     summary = ["The {} generated the most revenue: ${}".format(format_car(max_revenue["car"]), max_revenue["revenue"]),]
 
     return summary
