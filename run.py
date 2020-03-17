@@ -20,7 +20,7 @@ def read_myfile(filename):
             my_values_list.append(line.replace("lbs","").strip())
             content_dict[keystr] = my_values_list
     return ""
-def main():
+def create_body_para():
     for filename in os.listdir(SRC):
         srcstr = SRC + "/" + filename
         if os.path.isfile(srcstr) and srcstr.endswith(".txt"):         
@@ -40,4 +40,4 @@ def main():
         #x = requests.post(URLSTR, data = thejsonobject)
         #print(x)  
     
-main()
+create_body_para()

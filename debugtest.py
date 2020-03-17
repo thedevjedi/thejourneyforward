@@ -90,12 +90,12 @@ def list_newer(start_date):
         # Now move the date to the next one
         start_date = start_date + datetime.timedelta(days=1)
 
-def main():
+def create_body_para():
     start_date = get_start_date()
     list_newer(start_date)
 
 if __name__ == "__main__":
-    main()
+    create_body_para()
 
 
 

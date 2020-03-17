@@ -24,7 +24,7 @@ def write_mycsvDictfile(filename,thedict,error_info):
     return "File write of dicts OK."
 
 
-def main(): 
+def create_body_para(): 
     
     filename = "/home/scottdavis/eclipse-workspace/mytest/testlg.log"
     #filename = "/home/student-00-1982425570a3/syslog.log"
@@ -71,6 +71,6 @@ def main():
     
         
         
-main() 
+create_body_para() 
 #subprocess.Popen("/home/scottdavis/eclipse-workspace/mytest/anotherone.py somearg", shell=True)
         

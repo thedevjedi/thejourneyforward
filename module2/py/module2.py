@@ -35,7 +35,7 @@ def read_myfile(filename):
     return ""
 
 
-def main():
+def create_body_para():
     for filename in os.listdir(SRC):
         srcstr = SRC + "/" + filename
         if os.path.isfile(srcstr) and srcstr.endswith(".txt"):         
@@ -49,4 +49,4 @@ def main():
         x = requests.post(urlstr, data = myobj)
         print(x)
     
-main()
+create_body_para()

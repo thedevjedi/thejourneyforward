@@ -9,7 +9,7 @@ def copy_file(file):
 
 
 
-def main():
+def create_body_para():
     src = "/home/scottdavis/Documents"
     dest = "/data/prod_backup/"
     executor = futures.ProcessPoolExecutor()
@@ -26,6 +26,6 @@ def main():
     return 0
 
     
-main()
+create_body_para()
     
         

@@ -18,14 +18,14 @@ def resize_image(the_file):
     except Exception as e:
         print(e)
 
-def main():
+def create_body_para():
     for filename in os.listdir(SRC):
         srcstr = SRC + "/" + filename
         if os.path.isfile(srcstr):
             resize_image(filename)
             
 
-main()
+create_body_para()
 
 
     

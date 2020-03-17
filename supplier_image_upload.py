@@ -10,7 +10,7 @@ def upload_image(full_path_to_file,url_str):
         r = requests.post(url_str, files={'file':opened})
     return r
 
-def main():
+def create_body_para():
     
     url_to_upload_to = "0.0.0.0/upload"
     
@@ -20,4 +20,4 @@ def main():
             upload_image(filename,url_to_upload_to)
             
 
-main()
+create_body_para()

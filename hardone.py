@@ -128,7 +128,7 @@ def cars_dict_to_table(car_data):
     return table_data
    
 
-def main(argv):
+def create_body_para(argv):
     """Process the JSON data and generate a full report out of it."""
     tf = '/home/scottdavis/eclipse-workspace/mytest/' + 'cars.json'
     data = load_data(tf)
@@ -157,4 +157,4 @@ def main(argv):
     emails.send(message)
     
 if __name__ == "__main__":
-    main(sys.argv)
+    create_body_para(sys.argv)

@@ -17,7 +17,7 @@ def replace_domain(address, old_domain, new_domain):
     address = re.sub(old_domain_pattern, new_domain, address)
     return address
 
-def main():
+def create_body_para():
     csv_file_location = '/home/student-00-20fca4854148/data/user_emails.csv'
     report_file = '/home/student-00-20fca4854148/data' + '/updated_user_emails.csv'
     user_email_list = []
@@ -47,10 +47,10 @@ def main():
         output_file.close()    
     
     
-main()
+create_body_para()
 
-print("in main")
+print("in create_body_para")
 
 if 0 == 0:
-    print("in main")
+    print("in create_body_para")
 

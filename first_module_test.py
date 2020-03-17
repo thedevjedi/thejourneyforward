@@ -10,5 +10,5 @@ class TestRearrange(unittest.TestCase):
         self.assertEqual(rearrange_name(testcase),expected)
         
     
-unittest.main()
+unittest.create_body_para()
 
